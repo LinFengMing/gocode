@@ -2,14 +2,20 @@ package main
 
 import "fmt"
 
-// golang + 的使用
 func main() {
-	var i = 1
-	var j = 2
-	var r = i + j // 加法運算
-	fmt.Println("r =", r)
-	var str1 = "hello "
-	var str2 = "world"
-	var res = str1 + str2 // 字串合併
-	fmt.Println("res =", res)
+	// int8 -128 ~ 127
+	var i int8 = 127
+	fmt.Println("i =", i)
+	// uint8 0 ~ 255
+	var k uint8 = 255
+	fmt.Println("k =", k)
+	// int , unit , rune , byte
+	var a int = 8900
+	fmt.Println("a =", a)
+	var b uint = 1
+	fmt.Println("b =", b)
+	var c rune = 999999999
+	fmt.Println("c =", c)
+	var d byte = 255
+	fmt.Println("d =", d)
 }
