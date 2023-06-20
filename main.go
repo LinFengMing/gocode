@@ -5,15 +5,13 @@ import (
 )
 
 func main() {
-	var num5 = 1.1
-	fmt.Printf("num5 的數據類型是 %T \n", num5)
-	// 十進制形式
-	num6 := 5.12
-	num7 := .123 // 0.123
-	fmt.Println("num6 =", num6, "num7 =", num7)
-	// 科學技數法形式
-	num8 := 5.1234e2   // 5.1234 * 10 的 2 次方
-	num9 := 5.1234e2   // 5.1234 * 10 的 2 次方
-	num10 := 5.1234e-2 // 5.1234 / 10 的 2 次方
-	fmt.Println("num8 =", num8, "num9 =", num9, "num10 =", num10)
+	var c1 byte = 'a'
+	var c2 byte = '0'
+	// 是輸出對應字符的 UTF-8 碼值
+	fmt.Println("c1 =", c1)
+	fmt.Println("c2 =", c2)
+	// 需要格式化輸出
+	fmt.Printf("c1 = %c c2 = %c\n", c1, c2)
+	var c3 int = '北'
+	fmt.Printf("c3 = %c c3 對應的碼值 = %d", c3, c3)
 }
