@@ -5,11 +5,10 @@ import (
 )
 
 func main() {
-	var a int
-	var b float32
-	var c float64
-	var isMarried bool
-	var name string
-	// %v 按照變數的值輸出
-	fmt.Printf("a = %d, b = %v, c = %v, isMarried = %v, name = %v", a, b, c, isMarried, name)
+	var i int32 = 100
+	// i 轉成 float
+	var n1 float32 = float32(i)
+	var n2 int8 = int8(n1)
+	var n3 int64 = int64(i)
+	fmt.Printf("i = %v, n1 = %v, n2 = %v, n3 = %v", i, n1, n2, n3)
 }
