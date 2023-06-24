@@ -5,13 +5,16 @@ import (
 )
 
 func main() {
-	var i int = 10
-	fmt.Println("i 的地址 =", &i)
-	// ptr 是一個指針變數
-	// ptr 的類型是 *int
-	// ptr 的值是 &i
-	var ptr *int = &i
-	fmt.Printf("ptr = %v \n", ptr)
-	fmt.Printf("ptr 的地址 = %v \n", &ptr)
-	fmt.Printf("ptr 指向的值 = %v \n", *ptr)
+	var num int = 9
+	fmt.Printf("i address = %v \n", &num)
+	var ptr *int = &num
+	*ptr = 10
+	fmt.Printf("num = %v \n", num)
+	var a int = 300
+	var b int = 400
+	var ptr2 *int = &a
+	*ptr2 = 100
+	ptr2 = &b
+	*ptr2 = 200
+	fmt.Printf("a = %d, b = %d, ptr2 = %d \n", a, b, *ptr2)
 }
