@@ -5,16 +5,11 @@ import (
 )
 
 func main() {
-	var num int = 9
-	fmt.Printf("i address = %v \n", &num)
-	var ptr *int = &num
-	*ptr = 10
-	fmt.Printf("num = %v \n", num)
-	var a int = 300
-	var b int = 400
-	var ptr2 *int = &a
-	*ptr2 = 100
-	ptr2 = &b
-	*ptr2 = 200
-	fmt.Printf("a = %d, b = %d, ptr2 = %d \n", a, b, *ptr2)
+	// 嚴格區分大小寫
+	// 不能包含空格
+	// _ 是空標識符，用於佔用
+	// 25個保留關鍵字
+	var num int = 10
+	var Num int = 20
+	fmt.Printf("num = %v, Num = %v \n", num, Num)
 }
