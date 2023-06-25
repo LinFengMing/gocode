@@ -2,11 +2,22 @@ package main
 
 import (
 	"fmt"
-	// 為了能使用 utils.go 文件的變數或函式，需要先引入該 model 包
-	"gocode/model"
 )
 
 func main() {
-	// 使用 utils.go 的 HeroName package.標識符
-	fmt.Println(model.HeroName)
+	// 如果運算的數都是整數，除法只會保留整數部分
+	fmt.Println(10 / 4)
+	// 要保留小數部分，需要有浮點數加入運算
+	fmt.Println(10.0 / 4)
+	// a % b = a - a / b * b
+	fmt.Println("10 % 3 =", 10%3)
+	fmt.Println("-10 % 3 =", -10%3)
+	fmt.Println("10 % -3 =", 10%-3)
+	fmt.Println("-10 % -3 =", -10%-3)
+	// ++ and --
+	var i int = 10
+	i++
+	fmt.Println("i =", i)
+	i--
+	fmt.Println("i =", i)
 }
