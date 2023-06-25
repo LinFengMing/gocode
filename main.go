@@ -2,14 +2,11 @@ package main
 
 import (
 	"fmt"
+	// 為了能使用 utils.go 文件的變數或函式，需要先引入該 model 包
+	"gocode/model"
 )
 
 func main() {
-	// 嚴格區分大小寫
-	// 不能包含空格
-	// _ 是空標識符，用於佔用
-	// 25個保留關鍵字
-	var num int = 10
-	var Num int = 20
-	fmt.Printf("num = %v, Num = %v \n", num, Num)
+	// 使用 utils.go 的 HeroName package.標識符
+	fmt.Println(model.HeroName)
 }
