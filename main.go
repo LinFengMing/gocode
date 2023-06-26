@@ -5,14 +5,28 @@ import (
 )
 
 func main() {
-	var n1 int = 9
-	var n2 int = 8
-	fmt.Println(n1 == n2)
-	fmt.Println(n1 != n2)
-	fmt.Println(n1 > n2)
-	fmt.Println(n1 >= n2)
-	fmt.Println(n1 < n2)
-	fmt.Println(n1 <= n2)
-	flag := n1 > n2
-	fmt.Println("flag =", flag)
+	var age int = 40
+	if age > 30 && age < 50 {
+		fmt.Println("ok1")
+	}
+
+	if age > 30 && age < 40 {
+		fmt.Println("ok2")
+	}
+
+	if age > 30 || age < 50 {
+		fmt.Println("ok3")
+	}
+
+	if age > 30 || age < 40 {
+		fmt.Println("ok4")
+	}
+
+	if age > 30 {
+		fmt.Println("ok5")
+	}
+
+	if !(age > 30) {
+		fmt.Println("ok6")
+	}
 }
