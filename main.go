@@ -5,35 +5,22 @@ import (
 )
 
 func main() {
-	// & 和 * 的使用
-	a := 100
-	fmt.Println("a 的地址是", &a)
-	var ptr *int = &a
-	fmt.Println("ptr 指向的值是", *ptr)
-	var n int
-	var i int = 10
-	var j int = 12
-	// golang 沒有三元運算符
-	if i > j {
-		n = i
-	} else {
-		n = j
-	}
-	fmt.Println("n =", n)
-	// 取兩個數最大值
-	var n1 int = 10
-	var n2 int = 10
-	var max int
-	if n1 > n2 {
-		max = n1
-	} else {
-		max = n2
-	}
-	fmt.Println("max =", max)
-	// 取三個數最大值
-	var n3 = 45
-	if n3 > max {
-		max = n3
-	}
-	fmt.Println("max =", max)
+	var name string
+	var age byte
+	var sal float32
+	var isPass bool
+	// 方式一
+	fmt.Println("請輸入姓名")
+	fmt.Scanln(&name)
+	fmt.Println("請輸入年齡")
+	fmt.Scanln(&age)
+	fmt.Println("請輸入薪水")
+	fmt.Scanln(&sal)
+	fmt.Println("請輸入是否通過考試")
+	fmt.Scanln(&isPass)
+	fmt.Printf("姓名是 %v \n年齡是 %v \n薪水是 %v \n是否通過考試 %v \n", name, age, sal, isPass)
+	// 方式二
+	fmt.Println("請輸入你的姓名，年齡，薪水，是否通過考試，請用空格隔開")
+	fmt.Scanf("%s %d %f %t", &name, &age, &sal, &isPass)
+	fmt.Printf("姓名是 %v \n年齡是 %v \n薪水是 %v \n是否通過考試 %v \n", name, age, sal, isPass)
 }
