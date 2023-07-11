@@ -5,16 +5,10 @@ import (
 )
 
 func main() {
-	var a int = 1 >> 2
-	var b int = -1 >> 2
-	var c int = 1 << 2
-	var d int = -1 << 2
-	fmt.Println("a =", a)
-	fmt.Println("b =", b)
-	fmt.Println("c =", c)
-	fmt.Println("d =", d)
-	fmt.Println(2 & 3)
-	fmt.Println(2 | 3)
-	fmt.Println(2 ^ 3)
-	fmt.Println(-2 ^ 2)
+	var age int
+	fmt.Println("請輸入年齡：")
+	fmt.Scanln(&age)
+	if age > 18 {
+		fmt.Println("你的年齡大於18，要對自己的行為負責！")
+	}
 }
