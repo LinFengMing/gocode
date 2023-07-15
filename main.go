@@ -2,48 +2,44 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 func main() {
-	var z bool = true
-	if z == false {
-		fmt.Println("a")
-	} else if z {
-		fmt.Println("b")
-	} else if !z {
-		fmt.Println("c")
+	var second float64
+	fmt.Println("請輸入秒數：")
+	fmt.Scanln(&second)
+	if second <= 8 {
+		var gender string
+		fmt.Println("請輸入姓別：")
+		fmt.Scanln(&gender)
+		if gender == "男" {
+			fmt.Println("進入男子組的決賽")
+		} else {
+			fmt.Println("進入女子組的決賽")
+		}
 	} else {
-		fmt.Println("d")
+		fmt.Println("out")
 	}
-	var a float64 = 3.0
-	var b float64 = 100.0
-	var c float64 = 6.0
-	m := b*b - 4*a*c
-	if m > 0 {
-		x1 := (-b + math.Sqrt(m)) / 2 * a
-		x2 := (-b - math.Sqrt(m)) / 2 * a
-		fmt.Printf("x1 = %v, X2 = %v\n", x1, x2)
-	} else if m == 0 {
-		x1 := (-b + math.Sqrt(m)) / 2 * a
-		fmt.Printf("x1 = %v\n", x1)
+	var month byte
+	var age byte
+	var price float64 = 60.0
+	fmt.Println("請輸入遊玩的月份：")
+	fmt.Scanln(&month)
+	fmt.Println("請輸入年齡：")
+	fmt.Scanln(&age)
+	if month >= 4 && month <= 10 {
+		if age > 60 {
+			fmt.Printf("%v 月 年齡 %v 票價：%v\n", month, age, price/3)
+		} else if age >= 18 {
+			fmt.Printf("%v 月 年齡 %v 票價：%v\n", month, age, price)
+		} else {
+			fmt.Printf("%v 月 年齡 %v 票價：%v\n", month, age, price/2)
+		}
 	} else {
-		fmt.Println("無解")
-	}
-	var height int32
-	var money float32
-	var handsome bool
-	fmt.Println("請輸入身高：")
-	fmt.Scanln(&height)
-	fmt.Println("請輸入存款：")
-	fmt.Scanln(&money)
-	fmt.Println("請輸入帥嗎？")
-	fmt.Scanln(&handsome)
-	if height > 180 && money > 1.0 && handsome {
-		fmt.Println("我一定嫁給他")
-	} else if height > 180 || money > 1.0 || handsome {
-		fmt.Println("嫁吧，比上不足，比下有餘")
-	} else {
-		fmt.Println("不嫁")
+		if age >= 18 && age < 60 {
+			fmt.Println("淡季成人票價：40")
+		} else {
+			fmt.Println("淡季兒童老人票價：20")
+		}
 	}
 }
