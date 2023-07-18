@@ -4,11 +4,15 @@ import (
 	"fmt"
 )
 
+func test(char byte) byte {
+	return char + 1
+}
+
 func main() {
 	var key byte
 	fmt.Println("請輸入一個字母 a,b,c,d,e,f,g")
 	fmt.Scanf("%c", &key)
-	switch key {
+	switch test(key) {
 	case 'a':
 		fmt.Println("星期一")
 	case 'b':
@@ -25,5 +29,13 @@ func main() {
 		fmt.Println("星期日")
 	default:
 		fmt.Println("輸入有誤")
+	}
+	var n1 int32 = 20
+	var n2 int32 = 20
+	switch n1 {
+	case n2, 10, 5:
+		fmt.Println("ok")
+	default:
+		fmt.Println("沒有一致")
 	}
 }
