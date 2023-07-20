@@ -5,64 +5,47 @@ import (
 )
 
 func main() {
-	var age int = 10
-	switch {
-	case age == 10:
-		fmt.Println("age == 10")
-	case age == 20:
-		fmt.Println("age == 20")
+	var char byte
+	fmt.Println("請輸入一個字母 a,b,c,d,e")
+	fmt.Scanln(&char)
+	switch char {
+	case 'a':
+		fmt.Println("A")
+	case 'b':
+		fmt.Println("B")
+	case 'c':
+		fmt.Println("C")
+	case 'd':
+		fmt.Println("D")
+	case 'e':
+		fmt.Println("E")
 	default:
-		fmt.Println("沒有配對到")
+		fmt.Println("other")
 	}
-	var score int = 90
-	switch {
-	case score > 90:
-		fmt.Println("成績優秀")
-	case score >= 70 && score <= 90:
-		fmt.Println("成績優良")
-	case score >= 60 && score < 70:
-		fmt.Println("成績及格")
+	var score float64
+	fmt.Println("請輸入成績")
+	fmt.Scanln(&score)
+	switch int(score / 60) {
+	case 1:
+		fmt.Println("及格")
+	case 0:
+		fmt.Println("不及格")
 	default:
-		fmt.Println("成績不及格")
+		fmt.Println("輸入錯誤")
 	}
-	switch grade := 60; {
-	case grade > 90:
-		fmt.Println("成績優秀")
-	case grade >= 70 && grade <= 90:
-		fmt.Println("成績優良")
-	case grade >= 60 && grade < 70:
-		fmt.Println("成績及格")
+	var month byte
+	fmt.Println("請輸入月份")
+	fmt.Scanln(&month)
+	switch month {
+	case 3, 4, 5:
+		fmt.Println("spring")
+	case 6, 7, 8:
+		fmt.Println("summer")
+	case 9, 10, 11:
+		fmt.Println("autumn")
+	case 1, 2, 12:
+		fmt.Println("winter")
 	default:
-		fmt.Println("成績不及格")
-	}
-	var num int = 10
-	switch num {
-	case 10:
-		fmt.Println("ok1")
-		fallthrough
-	case 20:
-		fmt.Println("ok2")
-		fallthrough
-	case 30:
-		fmt.Println("ok3")
-	default:
-		fmt.Println("沒有配對到")
-	}
-	var x interface{}
-	var y = 10.0
-	x = y
-	switch i := x.(type) {
-	case nil:
-		fmt.Printf("x 的類型是 %T", i)
-	case int:
-		fmt.Printf("x 的類型是 int")
-	case float64:
-		fmt.Printf("x 的類型是 float64")
-	case func(int) float64:
-		fmt.Printf("x 的類型是 fun(int)")
-	case bool, string:
-		fmt.Printf("x 的類型是 bool 或 string")
-	default:
-		fmt.Printf("x 的類型是未知")
+		fmt.Println("輸入錯誤")
 	}
 }
