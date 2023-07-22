@@ -5,13 +5,19 @@ import (
 )
 
 func main() {
-	var str string = "hello,world!台北"
-	str2 := []rune(str)
-	for i := 0; i < len(str2); i++ {
-		fmt.Printf("%c\n", str2[i])
+	// 印出 1 ~ 100 之間所有9的倍數的整數的個數和總和
+	var count uint64 = 0
+	var sum uint64 = 0
+	var i uint64 = 1
+	for ; i < 101; i++ {
+		if i%9 == 0 {
+			count++
+			sum += i
+		}
 	}
-	str = "abc~ok新北"
-	for index, val := range str {
-		fmt.Printf("index = %d, val= %c\n", index, val)
+	fmt.Printf("個數 = %v, 總和 = %v\n", count, sum)
+	var n int = 6
+	for i := 0; i <= n; i++ {
+		fmt.Printf("%v + %v = %v\n", i, n-i, n)
 	}
 }
