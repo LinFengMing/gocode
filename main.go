@@ -5,21 +5,13 @@ import (
 )
 
 func main() {
-	for i := 1; i < 11; i++ {
-		fmt.Println("你好", i)
+	var str string = "hello,world!台北"
+	str2 := []rune(str)
+	for i := 0; i < len(str2); i++ {
+		fmt.Printf("%c\n", str2[i])
 	}
-	j := 1
-	for j < 11 {
-		fmt.Println("你好~", j)
-		j++
-	}
-	k := 1
-	for {
-		if k < 11 {
-			fmt.Println("ok")
-		} else {
-			break
-		}
-		k++
+	str = "abc~ok新北"
+	for index, val := range str {
+		fmt.Printf("index = %d, val= %c\n", index, val)
 	}
 }
