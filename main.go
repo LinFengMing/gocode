@@ -5,33 +5,35 @@ import (
 )
 
 func main() {
-	var sum int = 0
-	for i := 1; i <= 100; i++ {
-		sum += i
-		if sum > 20 {
-			fmt.Println("當 sum > 20 時，當前數是 ", i)
-			break
-		}
-	}
-	var name string
-	var pwd string
-	var loginChance int = 3
-	for i := 1; i <= 3; i++ {
-		fmt.Println("請輸入用戶名")
-		fmt.Scanln(&name)
-		fmt.Println("請輸入密碼")
-		fmt.Scanln(&pwd)
-		if name == "jiro" && pwd == "888" {
-			fmt.Println("登陸成功")
-			break
-		} else {
-			loginChance--
-			if loginChance > 0 {
-				fmt.Printf("還有%v次登陸機會\n", loginChance)
+here:
+	for i := 0; i < 2; i++ {
+		for j := 1; j < 4; j++ {
+			if j == 2 {
+				continue here
 			}
+			fmt.Println("i =", i, "j =", j)
 		}
 	}
-	if loginChance == 0 {
-		fmt.Println("沒有登陸成功")
+	for k := 1; k <= 100; k++ {
+		if k%2 == 0 {
+			continue
+		}
+		fmt.Println("奇數是", k)
 	}
+	var positiveCount int
+	var negativeCount int
+	var num int
+	for {
+		fmt.Println("請輸入一個整數")
+		fmt.Scanln(&num)
+		if num == 0 {
+			break
+		}
+		if num > 0 {
+			positiveCount++
+			continue
+		}
+		negativeCount++
+	}
+	fmt.Printf("正數個數是%v, 負數個數是%v", positiveCount, negativeCount)
 }
