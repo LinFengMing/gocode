@@ -4,24 +4,27 @@ import (
 	"fmt"
 )
 
-func test(n int) {
-	if n > 2 {
-		n--
-		test(n)
+func fbn(n int) int {
+	if n == 1 || n == 2 {
+		return 1
+	} else {
+		return fbn(n-1) + fbn(n-2)
 	}
-	fmt.Println("n =", n)
 }
 
-func test2(n int) {
-	if n > 2 {
-		n--
-		test2(n)
+func f(n int) int {
+	if n == 1 {
+		return 3
 	} else {
-		fmt.Println("n =", n)
+		return 2*f(n-1) + 1
 	}
 }
 
 func main() {
-	test(4)
-	test2(4)
+	fmt.Println("result =", fbn(3))
+	fmt.Println("result =", fbn(4))
+	fmt.Println("result =", fbn(5))
+	fmt.Println("result =", fbn(6))
+	fmt.Println("result =", f(1))
+	fmt.Println("result =", f(5))
 }
