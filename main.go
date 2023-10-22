@@ -6,21 +6,21 @@ import (
 )
 
 func main() {
-	// 尋找字串最後一次出現的位置，沒有回傳 -1
-	index := strings.LastIndex("go golang", "go")
-	fmt.Printf("index = %v\n", index)
-	// 字串取代
-	str := strings.Replace("go go hello", "go", "hi", -1)
-	fmt.Printf("str = %v\n", str)
-	// 字串分割
-	strArr := strings.Split("hello,world,ok", ",")
-	fmt.Printf("strArr = %v\n", strArr)
-	// 字串轉大寫
-	str2 := "goLang Hello"
-	str2 = strings.ToUpper(str2)
-	fmt.Printf("str2 = %v\n", str2)
-	// 字串轉小寫
-	str3 := "goLang Hello"
-	str3 = strings.ToLower(str2)
-	fmt.Printf("str3 = %v\n", str3)
+	// 字串去除頭尾空格
+	str := strings.TrimSpace(" hello haha ")
+	fmt.Printf("str = %q\n", str)
+	// 字串頭尾去除字串
+	str2 := strings.Trim("! hello! ", " !")
+	fmt.Printf("str2 = %q\n", str2)
+	// 字串頭去除字串
+	str3 := strings.TrimLeft("!hello!", "!")
+	fmt.Printf("str3 = %q\n", str3)
+	str4 := strings.TrimRight("!hello!", "!")
+	fmt.Printf("str4 = %q\n", str4)
+	// 判斷字串是否用某字串開始
+	b := strings.HasPrefix("ftp://192.168.10.1", "ftp")
+	fmt.Printf("b = %v\n", b)
+	// 判斷字串是否用某字串結束
+	b2 := strings.HasSuffix("NLT_abc.jpg", "abc")
+	fmt.Printf("b2 = %v\n", b2)
 }
