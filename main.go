@@ -2,30 +2,20 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 )
 
+func test() {
+	str := ""
+	for i := 0; i < 100000; i++ {
+		str += "hello" + strconv.Itoa(i)
+	}
+}
+
 func main() {
-	// 每 1 秒列印一個數字
-	i := 0
-	for {
-		i++
-		fmt.Println(i)
-		time.Sleep(time.Second)
-		if i == 10 {
-			break
-		}
-	}
-	// 每 0.1 秒列印一個數字
-	j := 0
-	for {
-		j++
-		fmt.Println(j)
-		time.Sleep(time.Millisecond * 100)
-		if j == 10 {
-			break
-		}
-	}
-	now := time.Now()
-	fmt.Printf("unix = %v, unixnano = %v", now.Unix(), now.UnixNano())
+	start := time.Now().Unix()
+	test()
+	end := time.Now().Unix()
+	fmt.Printf("執行 test() 使用時間為 %v 秒\n", end-start)
 }
