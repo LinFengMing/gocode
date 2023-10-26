@@ -2,20 +2,12 @@ package main
 
 import (
 	"fmt"
-	"strconv"
-	"time"
 )
 
-func test() {
-	str := ""
-	for i := 0; i < 100000; i++ {
-		str += "hello" + strconv.Itoa(i)
-	}
-}
-
 func main() {
-	start := time.Now().Unix()
-	test()
-	end := time.Now().Unix()
-	fmt.Printf("執行 test() 使用時間為 %v 秒\n", end-start)
+	num1 := 100
+	fmt.Printf("num1的類型 = %T, num1的值 = %v, num1的位置 = %v\n", num1, num1, &num1)
+	num2 := new(int)
+	fmt.Printf("num2的類型 = %T, num2的值 = %v, num2的位置 = %v, num2 指向的值 = %v\n",
+		num2, num2, &num2, *num2)
 }
