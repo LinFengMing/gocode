@@ -1,23 +1,27 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
+func readConf(name string) (err error) {
+	if name == "config.ini" {
+		return nil
+	} else {
+		return errors.New("讀取文件錯誤")
+	}
+}
+
 func test() {
-	defer func() {
-		err := recover() // recover() 可以抓取異常
-		if err != nil {
-			fmt.Println("err =", err)
-		}
-	}()
-	num1 := 10
-	num2 := 0
-	result := num1 / num2
-	fmt.Println("result =", result)
+	err := readConf("config.ini")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("test")
 }
 
 func main() {
 	test()
-	fmt.Println("hihi")
+	fmt.Println("main")
 }
