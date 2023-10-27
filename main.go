@@ -5,18 +5,12 @@ import (
 )
 
 func main() {
-	var hens [7]float64
-	hens[0] = 3.0
-	hens[1] = 5.0
-	hens[2] = 1.0
-	hens[3] = 3.4
-	hens[4] = 2.0
-	hens[5] = 50.0
-	hens[6] = 150.0
-	totalWeight := 0.0
-	for i := 0; i < len(hens); i++ {
-		totalWeight += hens[i]
-	}
-	avgWeight := fmt.Sprintf("%.2f", totalWeight/float64(len(hens)))
-	fmt.Printf("totalWeight = %v, avgWeight = %v", totalWeight, avgWeight)
+	var intArr [3]int // 預設值為 0, int64 間隔 8 個字元
+	fmt.Println(intArr)
+	intArr[0] = 10
+	intArr[1] = 20
+	intArr[2] = 30
+	fmt.Println(intArr)
+	fmt.Printf("intArr 的位置 = %p, intArr[0] 的位置 = %p, intArr[1] 的位置 = %p, intArr[2] 的位置 = %p\n",
+		&intArr, &intArr[0], &intArr[1], &intArr[2])
 }
