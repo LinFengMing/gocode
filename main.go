@@ -4,15 +4,22 @@ import (
 	"fmt"
 )
 
+// 長度是 array 類型的一部分
+func test01(arr [3]int) {
+	arr[0] = 44
+	fmt.Println("test01 arr =", arr)
+}
+
+func test02(arr *[3]int) {
+	fmt.Printf("test02 arr 指標的位置 = %p\n", &arr)
+	(*arr)[0] = 88
+	fmt.Println("test02 arr =", arr)
+}
+
 func main() {
-	var arr01 [3]int
-	arr01[0] = 1
-	arr01[1] = 3
-	arr01[2] = 5
-	fmt.Println(arr01)
-	// 預設值，數字為 0，字串為 ""，boolen 為 falst
-	var arr02 [3]float32
-	var arr03 [3]string
-	var arr04 [3]bool
-	fmt.Printf("arr02 = %v, arr03 = %v, arr04 = %v\n", arr02, arr03, arr04)
+	arr := [3]int{11, 22, 33}
+	fmt.Printf("main arr 的位置 = %p\n", &arr)
+	test01(arr)
+	test02(&arr)
+	fmt.Println("main arr =", arr)
 }
