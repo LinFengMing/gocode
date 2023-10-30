@@ -4,22 +4,23 @@ import (
 	"fmt"
 )
 
-// 長度是 array 類型的一部分
-func test01(arr [3]int) {
-	arr[0] = 44
-	fmt.Println("test01 arr =", arr)
-}
-
-func test02(arr *[3]int) {
-	fmt.Printf("test02 arr 指標的位置 = %p\n", &arr)
-	(*arr)[0] = 88
-	fmt.Println("test02 arr =", arr)
-}
-
 func main() {
-	arr := [3]int{11, 22, 33}
-	fmt.Printf("main arr 的位置 = %p\n", &arr)
-	test01(arr)
-	test02(&arr)
-	fmt.Println("main arr =", arr)
+	var myChars [26]byte
+	for i := 0; i < 26; i++ {
+		myChars[i] = 'A' + byte(i)
+	}
+	for i := 0; i < 26; i++ {
+		fmt.Printf("%c\n", myChars[i])
+	}
+
+	var intArr [5]int = [...]int{1, -1, 9, 90, 11}
+	maxVal := intArr[0]
+	maxIndex := 0
+	for i := 1; i < len(intArr); i++ {
+		if maxVal < intArr[i] {
+			maxVal = intArr[i]
+			maxIndex = i
+		}
+	}
+	fmt.Printf("maxVal = %v, maxIndex = %v", maxVal, maxIndex)
 }
