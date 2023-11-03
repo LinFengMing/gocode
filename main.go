@@ -5,11 +5,14 @@ import (
 )
 
 func main() {
-	var intArr [5]int = [...]int{1, 22, 33, 66, 99}
-	// 使用 intArr[1:3] index 1 到 3 不包含 3
-	slice := intArr[1:3]
-	fmt.Println("intArr =", intArr)
+	var slice []float64 = make([]float64, 5, 10)
+	slice[1] = 10
+	slice[3] = 20
 	fmt.Println("slice =", slice)
-	fmt.Println("slice 的元素數 =", len(slice))
-	fmt.Println("slice 的容量 =", cap(slice))
+	fmt.Println("slice size =", len(slice))
+	fmt.Println("slice cap =", cap(slice))
+	var slice2 []string = []string{"Tom", "Jack", "Marry"}
+	fmt.Println("slice2 =", slice2)
+	fmt.Println("slice2 size =", len(slice2))
+	fmt.Println("slice2 cap =", cap(slice2))
 }
