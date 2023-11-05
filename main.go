@@ -4,17 +4,17 @@ import (
 	"fmt"
 )
 
+func fbn(n int) []uint64 {
+	slice := make([]uint64, n)
+	slice[0] = 1
+	slice[1] = 1
+	for i := 2; i < n; i++ {
+		slice[i] = slice[i-1] + slice[i-2]
+	}
+	return slice
+}
+
 func main() {
-	str := "hello@world"
-	slice := str[6:]
-	fmt.Println("slice =", slice)
-	arr := []byte(str)
-	arr[0] = 'H'
-	str = string(arr)
-	fmt.Println("str =", str)
-	// []rune 是按字元處理，可以使用中文
-	arr1 := []rune(str)
-	arr1[0] = '哈'
-	str = string(arr1)
-	fmt.Println("str =", str)
+	slice := fbn(10)
+	fmt.Println(slice)
 }
