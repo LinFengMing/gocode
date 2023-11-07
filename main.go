@@ -4,17 +4,22 @@ import (
 	"fmt"
 )
 
-func fbn(n int) []uint64 {
-	slice := make([]uint64, n)
-	slice[0] = 1
-	slice[1] = 1
-	for i := 2; i < n; i++ {
-		slice[i] = slice[i-1] + slice[i-2]
+func BubbleSort(arr *[5]int) {
+	fmt.Println("排序前 arr =", (*arr))
+	temp := 0
+	for i := 0; i < len(*arr)-1; i++ {
+		for j := 0; j < len(*arr)-1-i; j++ {
+			if (*arr)[j] > (*arr)[j+1] {
+				temp = (*arr)[j]
+				(*arr)[j] = (*arr)[j+1]
+				(*arr)[j+1] = temp
+			}
+		}
 	}
-	return slice
+	fmt.Println("排序後 arr =", (*arr))
 }
 
 func main() {
-	slice := fbn(10)
-	fmt.Println(slice)
+	arr := [5]int{24, 69, 80, 57, 13}
+	BubbleSort(&arr)
 }
