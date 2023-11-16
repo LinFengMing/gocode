@@ -9,19 +9,22 @@ func main() {
 	cities["no1"] = "tokyo"
 	cities["no2"] = "osaka"
 	cities["no3"] = "nagoya"
-	// key 不存在，就是新增，存在就是修改
-	cities["no3"] = "fukuoka"
-	// delete 指定的 key 不存在時，删除不會執行，也不會報錯
-	delete(cities, "no4")
-	fmt.Println(cities)
-	// 尋找 map 指定 key 是否存在
-	val, ok := cities["no4"]
-	if ok {
-		fmt.Println("no4 key =", val)
-	} else {
-		fmt.Println("no4 key 不存在")
+	for k, v := range cities {
+		fmt.Printf("k = %v, v = %v\n", k, v)
 	}
-	// 刪除 map 全部 key
-	cities = make(map[string]string)
-	fmt.Println(cities)
+	fmt.Println("cities 有", len(cities), "組 key-value")
+	students := make(map[string]map[string]string)
+	students["no1"] = make(map[string]string, 2)
+	students["no1"]["name"] = "tom"
+	students["no1"]["sex"] = "male"
+	students["no2"] = make(map[string]string, 2)
+	students["no2"]["name"] = "mary"
+	students["no2"]["sex"] = "woman"
+	for k1, v1 := range students {
+		fmt.Printf("k1 = %v\n", k1)
+		for k2, v2 := range v1 {
+			fmt.Printf("\tk2 = %v, v2 = %v\n", k2, v2)
+		}
+		fmt.Println()
+	}
 }
