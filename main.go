@@ -13,6 +13,7 @@ type Cat struct {
 
 func main() {
 	var cat1 Cat
+	fmt.Printf("cat1的位置 = %p\n", &cat1)
 	cat1.Name = "小白"
 	cat1.Age = 3
 	cat1.Color = "白色"
