@@ -11,15 +11,14 @@ type Person struct {
 
 func main() {
 	var p1 Person
-	p1.Name = "John"
-	p1.Age = 25
-	fmt.Println(p1)
-	var p2 = Person{"John", 25}
-	fmt.Println(p2)
-	var p3 *Person = new(Person)
-	(*p3).Name = "John"
-	(*p3).Age = 25
-	fmt.Println(*p3)
-	var p4 *Person = &Person{"John", 25}
-	fmt.Println(*p4)
+	p1.Name = "小明"
+	p1.Age = 10
+	var p2 *Person = &p1
+	fmt.Println((*p2).Age)
+	fmt.Println(p2.Age)
+	p2.Name = "tom"
+	fmt.Printf("p2.Name = %v, p1.Name = %v\n", p2.Name, p1.Name)
+	fmt.Printf("p2.Name = %v, p1.Name = %v\n", (*p2).Name, p1.Name)
+	fmt.Printf("p1 的地址 = %p\n", &p1)
+	fmt.Printf("p2 的地址 = %p, p2 的值 = %p\n", &p2, p2)
 }
