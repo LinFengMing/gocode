@@ -1,20 +1,21 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 )
 
-type A struct {
-	Num int
-}
-
-type B struct {
-	Num int
+type Master struct {
+	Name  string `json:"name"` // struct tag
+	Agr   int    `json:"agr"`
+	Skill string `json:"skill"`
 }
 
 func main() {
-	var a A
-	var b B
-	a = A(b) // 可以轉換，但 struct Fields 必須一樣
-	fmt.Println(a, b)
+	master := Master{"牛魔王", 500, "芭蕉扇"}
+	jsonStr, err := json.Marshal(master)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(string(jsonStr))
 }
