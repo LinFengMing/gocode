@@ -1,21 +1,21 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
-type Master struct {
-	Name  string `json:"name"` // struct tag
-	Agr   int    `json:"agr"`
-	Skill string `json:"skill"`
+type Person struct {
+	Name string
+}
+
+func (p Person) test() {
+	p.Name = "jack"
+	fmt.Println("test() name =", p.Name) // 輸出 jack
 }
 
 func main() {
-	master := Master{"牛魔王", 500, "芭蕉扇"}
-	jsonStr, err := json.Marshal(master)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(string(jsonStr))
+	var p Person
+	p.Name = "tom"
+	p.test()
+	fmt.Println("main() name =", p.Name) // 輸出 tom
 }
