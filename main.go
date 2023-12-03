@@ -4,33 +4,36 @@ import (
 	"fmt"
 )
 
-type integer int
-
-func (i integer) print() {
-	fmt.Println("i =", i)
+type MenthodUtils struct {
 }
 
-func (i *integer) change() {
-	*i = *i + 1
+func (m MenthodUtils) Print() {
+	for i := 0; i < 10; i++ {
+		for j := 0; j < 8; j++ {
+			fmt.Print("*")
+		}
+		fmt.Println()
+	}
 }
 
-type Student struct {
-	Name string
-	Age  int
+func (m MenthodUtils) Print2(m1 int, m2 int) {
+	for i := 0; i < m1; i++ {
+		for j := 0; j < m2; j++ {
+			fmt.Print("*")
+		}
+		fmt.Println()
+	}
 }
 
-func (s *Student) String() string {
-	str := fmt.Sprintf("Name = [%v], Age = [%v]\n", s.Name, s.Age)
-	return str
+func (m MenthodUtils) Area(len float64, width float64) float64 {
+	return len * width
 }
 
 func main() {
-	var i integer = 10
-	i.change()
-	i.print()
-	stu := Student{
-		Name: "Tom",
-		Age:  20,
-	}
-	fmt.Println(&stu)
+	var m = MenthodUtils{}
+	m.Print()
+	fmt.Println()
+	m.Print2(2, 3)
+	fmt.Println()
+	fmt.Println(m.Area(2.0, 3.0))
 }
