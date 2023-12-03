@@ -4,21 +4,33 @@ import (
 	"fmt"
 )
 
-type Circle struct {
-	radius float64
+type integer int
+
+func (i integer) print() {
+	fmt.Println("i =", i)
 }
 
-func (c *Circle) area() float64 {
-	fmt.Printf("c 指向的位址 = %p\n", c)
-	c.radius = 10.0
-	return 3.14 * (*c).radius * (*c).radius
+func (i *integer) change() {
+	*i = *i + 1
+}
+
+type Student struct {
+	Name string
+	Age  int
+}
+
+func (s *Student) String() string {
+	str := fmt.Sprintf("Name = [%v], Age = [%v]\n", s.Name, s.Age)
+	return str
 }
 
 func main() {
-	var c Circle
-	fmt.Printf("main c 位址 = %p\n", &c)
-	c.radius = 5.0
-	res := (&c).area()
-	fmt.Println("Area of Circle(c) is", res)
-	fmt.Println("c.radius =", c.radius)
+	var i integer = 10
+	i.change()
+	i.print()
+	stu := Student{
+		Name: "Tom",
+		Age:  20,
+	}
+	fmt.Println(&stu)
 }
