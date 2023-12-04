@@ -5,61 +5,38 @@ import (
 )
 
 type Student struct {
-	name   string
-	gender string
-	age    int
-	id     int
-	score  float64
-}
-
-func (s *Student) say() string {
-	infoStr := fmt.Sprintf("student 的資訊 name = [%v], gender = [%v], age = [%v], id = [%v], score = [%v]",
-		s.name, s.gender, s.age, s.id, s.score)
-	return infoStr
-}
-
-type Box struct {
-	len    float64
-	width  float64
-	height float64
-}
-
-type Visitor struct {
 	Name string
 	Age  int
 }
 
-func (v *Visitor) showPrice() {
-	if v.Age >= 90 || v.Age <= 8 {
-		fmt.Println("考慮安全問題，不建議入場")
-		return
-	}
-	if v.Age >= 18 {
-		fmt.Printf("年齡為%v歲的%s，票價為20元\n", v.Age, v.Name)
-	} else {
-		fmt.Printf("年齡為%v歲的%s，免費\n", v.Age, v.Name)
-	}
-}
-
-func (b *Box) getVolumn() float64 {
-	return b.len * b.width * b.height
-}
-
 func main() {
-	s := Student{"tom", "male", 18, 1000, 99.98}
-	fmt.Println(s.say())
-	b := Box{1.1, 2.2, 3.3}
-	fmt.Printf("體積 = %.2f\n", b.getVolumn())
-	var v Visitor
-	for {
-		fmt.Println("請輸入名字")
-		fmt.Scanln(&v.Name)
-		if v.Name == "n" {
-			fmt.Println("退出")
-			break
-		}
-		fmt.Println("請輸入年齡")
-		fmt.Scanln(&v.Age)
-		v.showPrice()
+	var stu1 = Student{"小明", 18}
+	fmt.Println(stu1)
+	stud2 := Student{"小红", 20}
+	fmt.Println(stud2)
+	var stu3 = Student{
+		Name: "小剛",
+		Age:  22,
 	}
+	fmt.Println(stu3)
+	std4 := Student{
+		Age:  24,
+		Name: "小花",
+	}
+	fmt.Println(std4)
+	// 返迴結構體指針
+	var stu5 *Student = &Student{"小強", 26}
+	fmt.Println(*stu5)
+	stu6 := &Student{"小王", 24}
+	fmt.Println(*stu6)
+	var stud7 *Student = &Student{
+		Name: "小張",
+		Age:  28,
+	}
+	fmt.Println(*stud7)
+	std8 := &Student{
+		Age:  30,
+		Name: "小李",
+	}
+	fmt.Println(*std8)
 }
