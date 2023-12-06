@@ -4,38 +4,65 @@ import (
 	"fmt"
 )
 
-type person struct {
-	Name string
-	age  int
-	sal  float64
+type account struct {
+	name     string
+	password string
+	balance  float64
 }
 
-func NewPerson(name string) *person {
-	return &person{
-		Name: name,
+func NewAccount(name string, password string, balance float64) *account {
+	if len(name) < 6 || len(name) > 10 {
+		fmt.Println("name length should be between 6 and 10")
+		return nil
+	}
+	if len(password) != 6 {
+		fmt.Println("password length should be 6")
+		return nil
+	}
+	if balance < 20 {
+		fmt.Println("balance should be greater than 20")
+		return nil
+	}
+
+	return &account{
+		name:     name,
+		password: password,
+		balance:  balance,
 	}
 }
 
-func (p *person) SetAge(age int) {
-	if age > 0 && age < 150 {
-		p.age = age
+func SetName(a *account, name string) {
+	if len(name) >= 6 && len(name) <= 10 {
+		a.name = name
 	} else {
-		fmt.Println("年齡範圍不正確")
+		fmt.Println("name length should be between 6 and 10")
 	}
 }
 
-func (p *person) GetAge() int {
-	return p.age
+func GetName(a *account) string {
+	return a.name
 }
 
-func (p *person) SetSal(sal float64) {
-	if sal >= 3000 && sal <= 30000 {
-		p.sal = sal
+func SetPassword(a *account, password string) {
+	if len(password) == 6 {
+		a.password = password
 	} else {
-		fmt.Println("薪水範圍不正確")
+		fmt.Println("password length should be 6")
 	}
 }
 
-func (p *person) GetSal() float64 {
-	return p.sal
+func GetPassword(a *account) string {
+	return a.password
+}
+
+func SetBalance(a *account, balance float64) {
+	if balance >= 20 {
+		a.balance = balance
+	} else {
+		fmt.Println("balance should be greater than 20")
+	}
+}
+
+func GetBalance(a *account) float64 {
+	return a.balance
 }

@@ -6,9 +6,14 @@ import (
 )
 
 func main() {
-	p := model.NewPerson("smith")
-	p.SetAge(18)
-	p.SetSal(5000)
-	fmt.Println(*p)
-	fmt.Println(p.Name, "age =", p.GetAge(), "sal =", p.GetSal())
+	a := model.NewAccount("abc123", "123456", 100)
+	if a == nil {
+		fmt.Println("create account failed")
+	} else {
+		fmt.Println("create account success")
+	}
+	model.SetName(a, "abc123456")
+	model.SetPassword(a, "123456")
+	model.SetBalance(a, 50)
+	fmt.Printf("name = %v password = %v balance = %v", model.GetName(a), model.GetPassword(a), model.GetBalance(a))
 }
