@@ -2,18 +2,57 @@ package main
 
 import (
 	"fmt"
-	"gocode/model"
 )
 
+type Pupil struct {
+	Name  string
+	Age   int
+	Score int
+}
+
+func (p *Pupil) ShowInfo() {
+	fmt.Printf("Name = %v Age = %v Score = %v\n", p.Name, p.Age, p.Score)
+}
+
+func (p *Pupil) SetScore(score int) {
+	p.Score = score
+}
+
+func (p *Pupil) Testing() {
+	fmt.Println("PrimarySchoolStydent is testing...")
+}
+
+type Graduate struct {
+	Name  string
+	Age   int
+	Score int
+}
+
+func (g *Graduate) ShowInfo() {
+	fmt.Printf("Name = %v Age = %v Score = %v\n", g.Name, g.Age, g.Score)
+}
+
+func (g *Graduate) SetScore(score int) {
+	g.Score = score
+}
+
+func (g *Graduate) Testing() {
+	fmt.Println("Graduate is testing...")
+}
+
 func main() {
-	a := model.NewAccount("abc123", "123456", 100)
-	if a == nil {
-		fmt.Println("create account failed")
-	} else {
-		fmt.Println("create account success")
+	var pupil = &Pupil{
+		Name: "Tom",
+		Age:  10,
 	}
-	model.SetName(a, "abc123456")
-	model.SetPassword(a, "123456")
-	model.SetBalance(a, 50)
-	fmt.Printf("name = %v password = %v balance = %v", model.GetName(a), model.GetPassword(a), model.GetBalance(a))
+	pupil.Testing()
+	pupil.SetScore(90)
+	pupil.ShowInfo()
+	var graduate = &Graduate{
+		Name: "Jerry",
+		Age:  20,
+	}
+	graduate.Testing()
+	graduate.SetScore(100)
+	graduate.ShowInfo()
 }
