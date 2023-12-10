@@ -4,33 +4,41 @@ import (
 	"fmt"
 )
 
-type Monster struct {
-	Name string
-	Age  int
+type Usb interface {
+	Start()
+	Stop()
 }
-type E struct {
-	Monster
-	int
-}
-type Goods struct {
-	Name  string
-	Price float64
-}
-type Brand struct {
-	Name    string
-	Address string
-}
-type TV struct {
-	Goods
-	Brand
+type Phone struct {
 }
 
+func (p Phone) Start() {
+	fmt.Println("手機開始工作...")
+}
+func (p Phone) Stop() {
+	fmt.Println("手機停止工作...")
+}
+
+type Camera struct {
+}
+
+func (c Camera) Start() {
+	fmt.Println("相機開始工作...")
+}
+func (c Camera) Stop() {
+	fmt.Println("相機停止工作...")
+}
+
+type Computer struct {
+}
+
+func (c Computer) Working(usb Usb) {
+	usb.Start()
+	usb.Stop()
+}
 func main() {
-	var e E
-	e.Name = "牛魔王"
-	e.Age = 500
-	e.int = 20
-	fmt.Println(e)
-	tv := TV{Goods{"電視機001", 5000.99}, Brand{"索尼", "日本"}}
-	fmt.Println(tv.Goods.Name)
+	computer := Computer{}
+	phone := Phone{}
+	Camera := Camera{}
+	computer.Working(phone)
+	computer.Working(Camera)
 }
