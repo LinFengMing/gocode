@@ -8,6 +8,10 @@ type Usb interface {
 	Start()
 	Stop()
 }
+type Usb2 interface {
+	Start()
+	Stop()
+}
 type Phone struct {
 }
 
@@ -31,7 +35,7 @@ func (c Camera) Stop() {
 type Computer struct {
 }
 
-func (c Computer) Working(usb Usb) {
+func (c Computer) Working(usb Usb2) {
 	usb.Start()
 	usb.Stop()
 }
