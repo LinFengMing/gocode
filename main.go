@@ -4,45 +4,27 @@ import (
 	"fmt"
 )
 
-type Usb interface {
-	Start()
-	Stop()
+type AInterface interface {
+	Say()
 }
-type Usb2 interface {
-	Start()
-	Stop()
-}
-type Phone struct {
+type Stu struct {
+	Name string
 }
 
-func (p Phone) Start() {
-	fmt.Println("手機開始工作...")
-}
-func (p Phone) Stop() {
-	fmt.Println("手機停止工作...")
+func (s Stu) Say() {
+	fmt.Println("Stu Say()...")
 }
 
-type Camera struct {
-}
+type integer int
 
-func (c Camera) Start() {
-	fmt.Println("相機開始工作...")
-}
-func (c Camera) Stop() {
-	fmt.Println("相機停止工作...")
-}
-
-type Computer struct {
-}
-
-func (c Computer) Working(usb Usb2) {
-	usb.Start()
-	usb.Stop()
+func (i integer) Say() {
+	fmt.Println("integer Say i = ", i)
 }
 func main() {
-	computer := Computer{}
-	phone := Phone{}
-	Camera := Camera{}
-	computer.Working(phone)
-	computer.Working(Camera)
+	var s Stu
+	var a AInterface = s
+	a.Say()
+	var i integer = 10
+	var a2 AInterface = i
+	a2.Say()
 }
