@@ -7,24 +7,62 @@ import (
 type AInterface interface {
 	Say()
 }
+type BInterface interface {
+	Hello()
+}
+type CInterface interface {
+	test01()
+}
+type DInterface interface {
+	test02()
+}
+type EInterface interface {
+	CInterface
+	DInterface
+	test03()
+}
 type Stu struct {
-	Name string
 }
 
-func (s Stu) Say() {
-	fmt.Println("Stu Say()...")
+func (stu Stu) test01() {
+	fmt.Println("test01()...")
+}
+func (stu Stu) test02() {
+	fmt.Println("test02()...")
+}
+func (stu Stu) test03() {
+	fmt.Println("test03()...")
 }
 
-type integer int
-
-func (i integer) Say() {
-	fmt.Println("integer Say i = ", i)
+type Monster struct {
 }
+
+func (m Monster) Hello() {
+	fmt.Println("Monster Hello()...")
+}
+func (m Monster) Say() {
+	fmt.Println("Monster Say()...")
+}
+
+type T interface {
+}
+
 func main() {
-	var s Stu
-	var a AInterface = s
+	var monster Monster
+	var a AInterface = monster
+	var b BInterface = monster
 	a.Say()
-	var i integer = 10
-	var a2 AInterface = i
-	a2.Say()
+	b.Hello()
+	var stu Stu
+	var e EInterface = stu
+	e.test01()
+	e.test02()
+	e.test03()
+	var t T = stu
+	fmt.Println(t)
+	var t2 interface{} = stu
+	fmt.Println(t2)
+	var num1 float32 = 8.8
+	t2 = num1
+	fmt.Println(t2)
 }
