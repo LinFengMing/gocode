@@ -4,33 +4,36 @@ import (
 	"fmt"
 )
 
-type Monkey struct {
-	Name string
+type Usb interface {
+	Start()
+	Stop()
 }
-type BirdAble interface {
-	flying()
-}
-type FishAble interface {
-	swimming()
+type Phone struct {
+	name string
 }
 
-func (m *Monkey) climbing() {
-	fmt.Println(m.Name, "生來會爬樹")
+func (p Phone) Start() {
+	fmt.Println("手機開始工作")
+}
+func (p Phone) Stop() {
+	fmt.Println("手機停止工作")
 }
 
-type LittleMonkey struct {
-	Monkey
+type Camera struct {
+	name string
 }
 
-func (l *LittleMonkey) flying() {
-	fmt.Println(l.Name, "學會飛翔")
+func (c Camera) Start() {
+	fmt.Println("相機開始工作")
 }
-func (l *LittleMonkey) swimming() {
-	fmt.Println(l.Name, "學會游泳")
+func (c Camera) Stop() {
+	fmt.Println("相機停止工作")
 }
 func main() {
-	monkey := LittleMonkey{Monkey{"悟空"}}
-	monkey.climbing()
-	monkey.flying()
-	monkey.swimming()
+	// 定義多態數組
+	var usbArr [3]Usb
+	usbArr[0] = Phone{"小米手機"}
+	usbArr[1] = Phone{"華為手機"}
+	usbArr[2] = Camera{"索尼相機"}
+	fmt.Println(usbArr)
 }
