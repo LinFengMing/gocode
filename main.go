@@ -4,55 +4,40 @@ import (
 	"fmt"
 )
 
-type Usb interface {
-	Start()
-	Stop()
-}
-type Phone struct {
-	name string
+type Student struct {
 }
 
-func (p Phone) Start() {
-	fmt.Println("手機開始工作")
-}
-func (p Phone) Stop() {
-	fmt.Println("手機停止工作")
-}
-func (p Phone) Call() {
-	fmt.Println("手機打電話")
-}
-
-type Camera struct {
-	name string
-}
-
-func (c Camera) Start() {
-	fmt.Println("相機開始工作")
-}
-func (c Camera) Stop() {
-	fmt.Println("相機停止工作")
-}
-
-type Computer struct {
-}
-
-func (c Computer) Working(usb Usb) {
-	usb.Start()
-	// 如果 usb 指向的是 Phone 結構體變量，則調用 Call 方法
-	if phone, flag := usb.(Phone); flag {
-		phone.Call()
+func TypeJudge(items ...interface{}) {
+	for index, x := range items {
+		index++
+		switch x.(type) {
+		case bool:
+			fmt.Printf("第 %v 個參數是 bool 型別，值是 %v\n", index, x)
+		case float32:
+			fmt.Printf("第 %v 個參數是 float32 型別，值是 %v\n", index, x)
+		case float64:
+			fmt.Printf("第 %v 個參數是 float64 型別，值是 %v\n", index, x)
+		case int, int32, int64:
+			fmt.Printf("第 %v 個參數是 整數 型別，值是 %v\n", index, x)
+		case string:
+			fmt.Printf("第 %v 個參數是 字串 型別，值是 %v\n", index, x)
+		case Student:
+			fmt.Printf("第 %v 個參數是 Student 型別，值是 %v\n", index, x)
+		case *Student:
+			fmt.Printf("第 %v 個參數是 *Student 型別，值是 %v\n", index, x)
+		default:
+			fmt.Printf("第 %v 個參數是 不確定 型別，值是 %v\n", index, x)
+		}
 	}
-	usb.Stop()
 }
 func main() {
-	// 定義多態數組
-	var usbArr [3]Usb
-	usbArr[0] = Phone{"小米手機"}
-	usbArr[1] = Phone{"華為手機"}
-	usbArr[2] = Camera{"索尼相機"}
-	var computer Computer
-	for _, value := range usbArr {
-		computer.Working(value)
-		fmt.Println()
-	}
+	var n1 float32 = 1.1
+	var n2 float64 = 2.2
+	var n3 int32 = 30
+	var name string = "tom"
+	address := "北京"
+	n4 := 300
+	stu1 := Student{}
+	stu2 := &Student{}
+	TypeJudge(n1, n2, n3, name, address, n4, stu1, stu2)
 }
