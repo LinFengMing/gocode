@@ -32,9 +32,29 @@ func main() {
 			fmt.Scanln(&note)
 			details += fmt.Sprintf("\n收入\t%v\t\t%v\t\t%v", balance, money, note)
 		case "3":
-			fmt.Println("--------------------登記支出--------------------")
+			fmt.Println("本次支出金額:")
+			fmt.Scanln(&money)
+			if money > balance {
+				fmt.Println("餘額不足")
+				break
+			}
+			balance -= money
+			fmt.Println("本次支出說明:")
+			fmt.Scanln(&note)
+			details += fmt.Sprintf("\n支出\t%v\t\t%v\t\t%v", balance, money, note)
 		case "4":
-			loop = false
+			fmt.Println("你確定要退出嗎? y/n")
+			choice := ""
+			for {
+				fmt.Scanln(&choice)
+				if choice == "y" || choice == "n" {
+					break
+				}
+				fmt.Println("請輸入y/n")
+			}
+			if choice == "y" {
+				loop = false
+			}
 		default:
 			fmt.Println("請輸入正確選項")
 		}
