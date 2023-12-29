@@ -10,6 +10,7 @@ func main() {
 	balance := 10000.0
 	money := 0.0
 	note := ""
+	flag := false
 	details := "收支\t帳戶金額\t收支金額\t說明"
 	// 顯示主選單
 	for {
@@ -23,7 +24,11 @@ func main() {
 		switch key {
 		case "1":
 			fmt.Println("--------------------當前收支明細記錄--------------------")
-			fmt.Println(details)
+			if flag {
+				fmt.Println(details)
+			} else {
+				fmt.Println("目前沒有收支明細")
+			}
 		case "2":
 			fmt.Println("本次收入金額:")
 			fmt.Scanln(&money)
@@ -31,6 +36,7 @@ func main() {
 			fmt.Println("本次收入說明:")
 			fmt.Scanln(&note)
 			details += fmt.Sprintf("\n收入\t%v\t\t%v\t\t%v", balance, money, note)
+			flag = true
 		case "3":
 			fmt.Println("本次支出金額:")
 			fmt.Scanln(&money)
@@ -42,6 +48,7 @@ func main() {
 			fmt.Println("本次支出說明:")
 			fmt.Scanln(&note)
 			details += fmt.Sprintf("\n支出\t%v\t\t%v\t\t%v", balance, money, note)
+			flag = true
 		case "4":
 			fmt.Println("你確定要退出嗎? y/n")
 			choice := ""
