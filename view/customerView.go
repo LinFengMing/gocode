@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"gocode/model"
 	"gocode/service"
 )
 
@@ -20,6 +21,30 @@ func (this *CustomerView) list() {
 	}
 	fmt.Printf("\n----------客戶列表完成----------\n\n")
 }
+func (this *CustomerView) add() {
+	fmt.Println("------------新增客户------------")
+	fmt.Println("姓名：")
+	name := ""
+	fmt.Scanln(&name)
+	fmt.Println("性别：")
+	gender := ""
+	fmt.Scanln(&gender)
+	fmt.Println("年齡：")
+	age := 0
+	fmt.Scanln(&age)
+	fmt.Println("電話：")
+	phone := ""
+	fmt.Scanln(&phone)
+	fmt.Println("信箱：")
+	email := ""
+	fmt.Scanln(&email)
+	customer := model.NewCustomer2(name, gender, age, phone, email)
+	if this.customerService.Add(customer) {
+		fmt.Println("------------新增完成------------")
+	} else {
+		fmt.Println("------------新增失敗------------")
+	}
+}
 func (this *CustomerView) mainMenu() {
 	for {
 		fmt.Println("----------客戶訊息管理軟體----------")
@@ -32,7 +57,7 @@ func (this *CustomerView) mainMenu() {
 		fmt.Scanln(&this.key)
 		switch this.key {
 		case "1":
-			fmt.Println("新增客户")
+			this.add()
 		case "2":
 			fmt.Println("修改客户")
 		case "3":

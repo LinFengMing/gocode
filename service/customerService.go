@@ -17,3 +17,9 @@ func NewCustomerService() *CustomerService {
 func (this *CustomerService) List() []model.Customer {
 	return this.customers
 }
+func (this *CustomerService) Add(customer model.Customer) bool {
+	this.customerNum++
+	customer.Id = this.customerNum
+	this.customers = append(this.customers, customer)
+	return true
+}
