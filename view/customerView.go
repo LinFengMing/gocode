@@ -45,6 +45,25 @@ func (this *CustomerView) add() {
 		fmt.Println("------------新增失敗------------")
 	}
 }
+func (this *CustomerView) delete() {
+	fmt.Println("------------刪除客户------------")
+	fmt.Println("請輸入待刪除客户編號(-1退出)：")
+	id := -1
+	fmt.Scanln(&id)
+	if id == -1 {
+		return
+	}
+	fmt.Println("確認是否刪除(Y/N)：")
+	choice := ""
+	fmt.Scanln(&choice)
+	if choice == "y" || choice == "Y" {
+		if this.customerService.Delete(id) {
+			fmt.Println("------------刪除完成------------")
+		} else {
+			fmt.Println("------------刪除失敗------------")
+		}
+	}
+}
 func (this *CustomerView) mainMenu() {
 	for {
 		fmt.Println("----------客戶訊息管理軟體----------")
@@ -61,7 +80,7 @@ func (this *CustomerView) mainMenu() {
 		case "2":
 			fmt.Println("修改客户")
 		case "3":
-			fmt.Println("刪除客户")
+			this.delete()
 		case "4":
 			this.list()
 		case "5":
