@@ -64,6 +64,19 @@ func (this *CustomerView) delete() {
 		}
 	}
 }
+func (this *CustomerView) exit() {
+	fmt.Println("確認是否退出(Y/N)：")
+	for {
+		fmt.Scanln(&this.key)
+		if this.key == "y" || this.key == "Y" || this.key == "n" || this.key == "N" {
+			break
+		}
+		fmt.Println("輸入錯誤，請重新輸入")
+	}
+	if this.key == "y" || this.key == "Y" {
+		this.loop = false
+	}
+}
 func (this *CustomerView) mainMenu() {
 	for {
 		fmt.Println("----------客戶訊息管理軟體----------")
@@ -84,7 +97,7 @@ func (this *CustomerView) mainMenu() {
 		case "4":
 			this.list()
 		case "5":
-			this.loop = false
+			this.exit()
 		default:
 			fmt.Println("輸入錯誤，請重新輸入")
 		}
