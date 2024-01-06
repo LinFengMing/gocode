@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"os"
 )
 
@@ -11,10 +13,14 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(file)
-	err = file.Close()
-	if err != nil {
-		fmt.Println(err)
-		return
+	defer file.Close()
+	reader := bufio.NewReader(file)
+	for {
+		str, err := reader.ReadString('\n')
+		if err == io.EOF {
+			break
+		}
+		fmt.Print(str)
 	}
+	fmt.Println("End of reding file")
 }
