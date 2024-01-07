@@ -7,30 +7,42 @@ import (
 	"os"
 )
 
-func CopyFile(dstFileName, srcFileName string) (written int64, err error) {
-	srcFile, err := os.Open(srcFileName)
-	if err != nil {
-		fmt.Printf("open file err = %v\n", err)
-		return
-	}
-	defer srcFile.Close()
-	reader := bufio.NewReader(srcFile)
-	desFile, err := os.OpenFile(dstFileName, os.O_WRONLY|os.O_CREATE, 0666)
-	if err != nil {
-		fmt.Printf("open file err = %v\n", err)
-		return
-	}
-	writer := bufio.NewWriter(desFile)
-	defer desFile.Close()
-	return io.Copy(writer, reader)
+type CharCount struct {
+	ChCount    int
+	NumCount   int
+	SpaceCount int
+	OtherCount int
 }
+
 func main() {
-	srcFile := "gril.jpg"
-	dstFile := "gril2.jpg"
-	_, err := CopyFile(dstFile, srcFile)
-	if err == nil {
-		fmt.Println("拷貝完成")
-	} else {
-		fmt.Printf("拷貝錯誤 err = %v\n", err)
+	file, err := os.Open("abc.txt")
+	if err != nil {
+		fmt.Printf("open file err = %v\n", err)
+		return
 	}
+	defer file.Close()
+	var count CharCount
+	reader := bufio.NewReader(file)
+	for {
+		str, err := reader.ReadString('\n')
+		if err == io.EOF {
+			break
+		}
+		for _, v := range str {
+			switch {
+			case v >= 'a' && v <= 'z':
+				fallthrough
+			case v >= 'A' && v <= 'Z':
+				count.ChCount++
+			case v == ' ' || v == '\t':
+				count.SpaceCount++
+			case v >= '0' && v <= '9':
+				count.NumCount++
+			default:
+				count.OtherCount++
+			}
+		}
+	}
+	fmt.Printf("char count = %v, num count = %v, space count = %v, other count = %v\n",
+		count.ChCount, count.NumCount, count.SpaceCount, count.OtherCount)
 }
