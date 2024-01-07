@@ -1,16 +1,22 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 )
 
 func main() {
-	// read file
-	data, err := os.ReadFile("test.txt")
+	file, err := os.OpenFile("abc.txt", os.O_WRONLY|os.O_CREATE, 0666)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Printf("%v", string(data))
+	defer file.Close()
+	str := "Hello World!\n"
+	writer := bufio.NewWriter(file)
+	for i := 0; i < 5; i++ {
+		writer.WriteString(str)
+	}
+	writer.Flush()
 }

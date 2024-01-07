@@ -1,3 +1,0 @@
-hello world!
-台北!abc!golang!
-go,hello world!
