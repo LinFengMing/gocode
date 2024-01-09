@@ -6,11 +6,11 @@ import (
 )
 
 type Monster struct {
-	Name     string
-	Age      int
-	Birthday string
-	Sal      float64
-	Skill    string
+	Name     string  `json:"name"`
+	Age      int     `json:"age"`
+	Birthday string  `json:"birthday"`
+	Sal      float64 `json:"sal"`
+	Skill    string  `json:"skill"`
 }
 
 func testStruct() {
