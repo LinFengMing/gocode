@@ -2,20 +2,33 @@ package main
 
 import "fmt"
 
-func main() {
-	intChan := make(chan int, 3)
-	intChan <- 100
-	intChan <- 200
-	close(intChan)
-	// intChan <- 300 // panic: send on closed channel
-	n1 := <-intChan
-	fmt.Println("n1 =", n1)
-	intChan2 := make(chan int, 100)
-	for i := 0; i < 100; i++ {
-		intChan2 <- i * 2
+func writeData(intChan chan int) {
+	for i := 1; i <= 50; i++ {
+		intChan <- i
+		fmt.Println("writeData ", i)
 	}
-	close(intChan2)
-	for v := range intChan2 {
-		fmt.Println("v =", v)
+	close(intChan)
+}
+func readData(intChan chan int, exitChan chan bool) {
+	for {
+		v, ok := <-intChan
+		if !ok {
+			break
+		}
+		fmt.Println("readData ", v)
+	}
+	exitChan <- true
+	close(exitChan)
+}
+func main() {
+	intChan := make(chan int, 50)
+	exitChan := make(chan bool, 1)
+	go writeData(intChan)
+	go readData(intChan, exitChan)
+	for {
+		_, ok := <-exitChan
+		if !ok {
+			break
+		}
 	}
 }
