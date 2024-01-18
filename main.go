@@ -4,36 +4,24 @@ import (
 	"fmt"
 )
 
-func send(ch chan<- int, exitChan chan struct{}) {
-	for i := 0; i < 10; i++ {
-		ch <- i
-	}
-	close(ch)
-	var a struct{}
-	exitChan <- a
-}
-func recv(ch <-chan int, exitChan chan struct{}) {
-	for {
-		v, ok := <-ch
-		if !ok {
-			break
-		}
-		fmt.Println(v)
-	}
-	var a struct{}
-	exitChan <- a
-}
 func main() {
-	ch := make(chan int, 10)
-	exitChan := make(chan struct{}, 2)
-	go send(ch, exitChan)
-	go recv(ch, exitChan)
-	var total = 0
-	for _ = range exitChan {
-		total++
-		if total == 2 {
-			break
+	intChan := make(chan int, 10)
+	for i := 0; i < 10; i++ {
+		intChan <- i
+	}
+	stringsChan := make(chan string, 5)
+	for i := 0; i < 5; i++ {
+		stringsChan <- "hello" + fmt.Sprintf("%d", i)
+	}
+	for {
+		select {
+		case v := <-intChan:
+			fmt.Printf("從 intChan 讀取的數據 %d\n", v)
+		case v := <-stringsChan:
+			fmt.Printf("從 stringsChan讀取的數據 %s\n", v)
+		default:
+			fmt.Printf("都取不到了\n")
+			return
 		}
 	}
-	fmt.Println("结束")
 }
