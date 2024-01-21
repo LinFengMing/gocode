@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
 )
@@ -17,9 +18,6 @@ func (s Monster) Print() {
 	fmt.Println(s)
 	fmt.Println("---end---")
 }
-func (s Monster) GetSum(n1, n2 int) int {
-	return n1 + n2
-}
 func (s Monster) Set(name string, age int, score float32, sex string) {
 	s.Name = name
 	s.Age = age
@@ -30,28 +28,21 @@ func TestStruct(a interface{}) {
 	typ := reflect.TypeOf(a)
 	val := reflect.ValueOf(a)
 	kd := val.Kind()
-	if kd != reflect.Struct {
+	if kd != reflect.Ptr && val.Elem().Kind() != reflect.Struct {
 		fmt.Println("expect struct")
 		return
 	}
-	num := val.NumField()
-	fmt.Printf("struct has %d fields\n", num)
+	num := val.Elem().NumField()
+	val.Elem().Field(0).SetString("白骨精")
 	for i := 0; i < num; i++ {
-		fmt.Printf("Field %d: value = %v\n", i, val.Field(i))
-		tagVal := typ.Field(i).Tag.Get("json")
-		if tagVal != "" {
-			fmt.Printf("Field %d: tag = %v\n", i, tagVal)
-		}
+		fmt.Printf("Field %d: 值為=%v\n", i, val.Elem().Field(i).Kind())
 	}
-	numOfMethod := val.NumMethod()
-	fmt.Printf("struct has %d methods\n", numOfMethod)
-	// 方法的排序默認是按照函數名的排序（ASCII碼）
-	val.Method(1).Call(nil)
-	var params []reflect.Value
-	params = append(params, reflect.ValueOf(10))
-	params = append(params, reflect.ValueOf(40))
-	res := val.Method(0).Call(params) // 傳入的參數是 []reflect.Value, 返回 []reflect.Value
-	fmt.Println("res=", res[0].Int())
+	fmt.Printf("struct has %d Field\n", num)
+	tag := typ.Elem().Field(0).Tag.Get("json")
+	fmt.Printf("tag = %v\n", tag)
+	numOfMethod := val.Elem().NumMethod()
+	fmt.Printf("struct has %d method\n", numOfMethod)
+	val.Elem().Method(0).Call(nil)
 }
 func main() {
 	var a Monster = Monster{
@@ -59,5 +50,8 @@ func main() {
 		Age:   500,
 		Score: 98.8,
 	}
-	TestStruct(a)
+	result, _ := json.Marshal(a)
+	fmt.Println("json result =", string(result))
+	TestStruct(&a)
+	fmt.Println(a)
 }
