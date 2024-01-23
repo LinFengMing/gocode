@@ -5,6 +5,19 @@ import (
 	"net"
 )
 
+func proccess(conn net.Conn) {
+	defer conn.Close()
+	for {
+		buf := make([]byte, 1024)
+		fmt.Printf("伺服器在等待用戶端%s發送訊息\n", conn.RemoteAddr().String())
+		n, err := conn.Read(buf)
+		if err != nil {
+			fmt.Println("conn.Read err =", err)
+			return
+		}
+		fmt.Print(string(buf[:n]))
+	}
+}
 func main() {
 	fmt.Println("伺服器開始監聽")
 	listen, err := net.Listen("tcp", "0.0.0.0:8888")
@@ -21,5 +34,6 @@ func main() {
 		} else {
 			fmt.Printf("Accept success conn = %v, ip = %v\n", conn, conn.RemoteAddr().String())
 		}
+		go proccess(conn)
 	}
 }
