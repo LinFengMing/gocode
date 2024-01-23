@@ -9,7 +9,6 @@ func proccess(conn net.Conn) {
 	defer conn.Close()
 	for {
 		buf := make([]byte, 1024)
-		fmt.Printf("伺服器在等待用戶端%s發送訊息\n", conn.RemoteAddr().String())
 		n, err := conn.Read(buf)
 		if err != nil {
 			fmt.Println("conn.Read err =", err)

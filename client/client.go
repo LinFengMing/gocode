@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -14,15 +15,22 @@ func main() {
 		return
 	}
 	reader := bufio.NewReader(os.Stdin)
-	line, err := reader.ReadString('\n')
-	if err != nil {
-		fmt.Println("Error reading", err)
-		return
+	for {
+		line, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Println("Error reading", err)
+			return
+		}
+		line = strings.Trim(line, "\r\n")
+		if line == "exit" {
+			fmt.Println("Client exiting")
+			break
+		}
+		n, err := conn.Write([]byte(line + "\n"))
+		if err != nil {
+			fmt.Println("Error writing", err)
+			return
+		}
+		fmt.Printf("Send %d bytes to server\n", n)
 	}
-	n, err := conn.Write([]byte(line))
-	if err != nil {
-		fmt.Println("Error writing", err)
-		return
-	}
-	fmt.Printf("Send %d bytes to server\n", n)
 }
