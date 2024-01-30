@@ -1,21 +1,50 @@
 package main
 
 import (
+	"encoding/binary"
+	"encoding/json"
 	"fmt"
+	"gocode/common/message"
+	"io"
 	"net"
 )
 
+func readPkg(conn net.Conn) (mes message.Message, err error) {
+	buf := make([]byte, 8096)
+	fmt.Printf("伺服器在等待客戶端 %s 傳送訊息\n", conn.RemoteAddr().String())
+	_, err = conn.Read(buf[:4])
+	if err != nil {
+		return
+	}
+	// 根據 buf[:4] 轉成一個 uint32 數據類型
+	var pkgLen uint32 = binary.BigEndian.Uint32(buf[:4])
+	// 根據 pkgLen 讀取消息內容
+	n, err := conn.Read(buf[:pkgLen])
+	if n != int(pkgLen) || err != nil {
+		return
+	}
+	// 把 pkgLen 反序列化成 -> message.Message
+	err = json.Unmarshal(buf[:pkgLen], &mes)
+	if err != nil {
+		fmt.Println("json.Unmarshal err =", err)
+		return
+	}
+	return
+}
 func process(conn net.Conn) {
 	defer conn.Close()
 	for {
-		buf := make([]byte, 8096)
-		fmt.Printf("伺服器在等待客戶端 %s 傳送訊息\n", conn.RemoteAddr().String())
-		n, err := conn.Read(buf[:4])
-		if n != 4 || err != nil {
-			fmt.Println("conn.Read err =", err)
-			return
+		mes, err := readPkg(conn)
+		if err != nil {
+			if err == io.EOF {
+				fmt.Println("客戶端退出了，伺服器也退出")
+				return
+			} else {
+				fmt.Println("readPkg err =", err)
+				return
+			}
 		}
-		fmt.Println("讀到的 buf =", buf[:4])
+		fmt.Println("mes =", mes)
 	}
 }
 func main() {

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"gocode/common/message"
 	"net"
+	"time"
 )
 
 func Login(userId int, userPwd string) (err error) {
@@ -45,6 +46,15 @@ func Login(userId int, userPwd string) (err error) {
 		fmt.Println("conn.Write(buf) err =", err)
 		return
 	}
-	fmt.Printf("客戶端發送消息的長度 = %d, 內容 = %s", len(data), string(data))
+	// fmt.Printf("客戶端發送消息的長度 = %d, 內容 = %s", len(data), string(data))
+	// 發送消息本身
+	_, err = conn.Write(data)
+	if err != nil {
+		fmt.Println("conn.Write(data) err =", err)
+		return
+	}
+	time.Sleep(time.Second * 10)
+	fmt.Println("休眠了10秒鐘")
+	// 這裡還需要處理伺服器端返回的消息
 	return
 }
