@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"gocode/common/message"
 	"net"
-	"time"
 )
 
 func Login(userId int, userPwd string) (err error) {
@@ -53,8 +52,18 @@ func Login(userId int, userPwd string) (err error) {
 		fmt.Println("conn.Write(data) err =", err)
 		return
 	}
-	time.Sleep(time.Second * 10)
-	fmt.Println("休眠了10秒鐘")
-	// 這裡還需要處理伺服器端返回的消息
+	mes, err = readPkg(conn)
+	if err != nil {
+		fmt.Println("readPkg err =", err)
+		return
+	}
+	// 將 mes 的 Data 部分反序列化成 LoginResMes
+	var loginResMes message.LoginResMes
+	err = json.Unmarshal([]byte(mes.Data), &loginResMes)
+	if loginResMes.Code == 200 {
+		fmt.Println("登入成功")
+	} else if loginResMes.Code == 500 {
+		fmt.Println(loginResMes.Error)
+	}
 	return
 }

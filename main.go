@@ -38,12 +38,7 @@ func main() {
 		fmt.Scanf("%d\n", &userId)
 		fmt.Println("請輸入用戶的密碼:")
 		fmt.Scanf("%s\n", &userPwd)
-		err := client.Login(userId, userPwd)
-		if err != nil {
-			fmt.Println("登入失敗")
-		} else {
-			fmt.Println("登入成功")
-		}
+		client.Login(userId, userPwd)
 	} else if key == 2 {
 		fmt.Println("註冊用戶的流程")
 	} else {
